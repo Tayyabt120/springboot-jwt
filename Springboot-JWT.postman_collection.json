@@ -1,0 +1,48 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Springboot-JWT",
+		"_postman_id": "aa0eab22-a003-2560-d0b1-7677647c0c51",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"request": {
+				"url": "localhost:8080/auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"foo\",\n\t\"password\":\"foo\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "sample",
+			"request": {
+				"url": "http://localhost:8080/sample",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmb28iLCJleHAiOjE1ODA1Nzk3MjEsImlhdCI6MTU4MDU3OTY2MX0.tqt-pSWquzH7aB4TB-tMdV7p5mvjZaxuwazqhwCeQBo",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

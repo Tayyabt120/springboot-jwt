@@ -1,5 +1,6 @@
 package com.tab.springjwt.util;
 
+import com.tab.springjwt.model.AuthenticationResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,14 +34,17 @@ public class JwtUtils {
         return isExpired;
     }
 
-    public String generateJwtToken(UserDetails userDetails) {
+    public AuthenticationResponse generateJwtToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims)
+        Date issuedAt = new Date(System.currentTimeMillis());
+        Date expiredAt = new Date(System.currentTimeMillis() + 1000 * 60);
+        String token = Jwts.builder().setClaims(claims)
                 .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setIssuedAt(issuedAt)
+                .setExpiration(expiredAt)
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+        return new AuthenticationResponse(token, expiredAt);
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
